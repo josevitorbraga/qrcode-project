@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Header, Footer, Container } from "./styles";
 
+import CheckInParent from "./pages/CheckInParent";
 import Home from "./pages/Home/index";
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
       </Header>
       <Container>
         <Switch>
-          <Route to="/" component={Home}></Route>
+          <Route path="/checkin" component={CheckInParent} exact></Route>
+          <Route path="/" component={Home}></Route>
         </Switch>
       </Container>
       <Footer>Direitos reservados @josevitorbraga</Footer>

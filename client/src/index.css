@@ -1,10 +1,10 @@
 html{
-  background-color: #131621;
+  background-color: #f8f8f8;
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: 'Oxygen', sans-serif;
-  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  color: #2b2c2e;
 }
