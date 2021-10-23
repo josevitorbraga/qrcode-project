@@ -16,7 +16,7 @@ const childSchema = new Schema({
     required: true,
   },
   parent: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "Parent",
   },
 });

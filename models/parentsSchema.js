@@ -33,7 +33,7 @@ const parentSchema = new Schema({
   },
   children: [
     {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "Child",
     },
   ],
