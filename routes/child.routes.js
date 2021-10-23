@@ -7,9 +7,9 @@ const childRouter = Router();
 
 childRouter.post("/:parentId", async (req, res) => {
   const { parentId } = req.params;
-  const { name, age } = req.body;
+  const { name, age, relationship } = req.body;
 
-  const child = new Child({ name, age, parent: parentId });
+  const child = new Child({ name, age, relationship, parent: parentId });
 
   const parent = await Parent.findById(parentId);
   parent.childrens.push(child);

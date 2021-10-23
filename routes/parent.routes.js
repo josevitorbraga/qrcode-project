@@ -4,8 +4,10 @@ import Parent from "../models/parentsSchema.js";
 
 const parentRouter = Router();
 
-parentRouter.get("/", (req, res) => {
-  Parent.find({})
+parentRouter.get("/:id", (req, res) => {
+  const { id } = req.params;
+  Parent.findById(id)
+    .populate("childrens")
     .then(parents => {
       res.json(parents);
     })

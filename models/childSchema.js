@@ -15,6 +15,10 @@ const childSchema = new Schema({
     type: Number,
     required: true,
   },
+  relationship: {
+    type: String,
+    required: true,
+  },
   parent: {
     type: String,
     ref: "Parent",
