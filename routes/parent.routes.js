@@ -14,6 +14,16 @@ parentRouter.get("/", (req, res) => {
     });
 });
 
+parentRouter.get("/:cpf", (req, res) => {
+  Parent.findOne({ cpf: req.params.cpf })
+    .then(parent => {
+      res.json(parent);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
 parentRouter.post("/", (req, res) => {
   const { cpf, name, email, phone1, phone2, address } = req.body;
 
@@ -33,6 +43,25 @@ parentRouter.post("/", (req, res) => {
     })
     .catch(err => {
       res.send(err);
+    });
+});
+
+parentRouter.put("/:parentId", (req, res) => {
+  const { cpf, name, email, phone1, phone2, address } = req.body;
+
+  Parent.findByIdAndUpdate(req.params.parentId, {
+    cpf,
+    name,
+    email,
+    phone1,
+    phone2,
+    address,
+  })
+    .then(parent => {
+      res.json(parent);
+    })
+    .catch(err => {
+      res.status(404).json(err);
     });
 });
 

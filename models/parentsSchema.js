@@ -31,7 +31,7 @@ const parentSchema = new Schema({
     type: String,
     required: true,
   },
-  children: [
+  childrens: [
     {
       type: String,
       ref: "Child",
