@@ -10,10 +10,6 @@ const app = express();
 app.use(express.json());
 app.use(router);
 
-app.get("/api", (req, res) => {
-  res.send("Hello World");
-});
-
 const run = async () => {
   await mongoose
     .connect(process.env.MONGO_DB, {

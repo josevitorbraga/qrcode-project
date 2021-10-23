@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
+import shortid from "shortid";
 const { Schema, model } = mongoose;
 
 const parentSchema = new Schema({
+  _id: {
+    type: String,
+    default: shortid.generate,
+  },
+  cpf: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -10,7 +19,11 @@ const parentSchema = new Schema({
     type: String,
     required: true,
   },
-  phone: {
+  phone1: {
+    type: String,
+    required: true,
+  },
+  phone2: {
     type: String,
     required: true,
   },
