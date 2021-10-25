@@ -15,6 +15,7 @@ import { Header, Footer, Container } from "./styles";
 import CheckInDependents from "./pages/CheckInDependents";
 import CheckInParent from "./pages/CheckInParent";
 import Home from "./pages/Home/index";
+import CheckInReceipt from "./pages/CheckInReceipt";
 
 export default function App() {
   const history = useHistory();
@@ -31,16 +32,20 @@ export default function App() {
           <ToastContainer />
           <Switch>
             <Route
+              path="/checkin/:id/dependents/:childId"
+              component={CheckInReceipt}
+            />
+            <Route
               path="/checkin/:id/dependents"
               component={CheckInDependents}
-            ></Route>
+            />
             <Route
               path="/checkin"
               component={CheckInParent}
               history={history}
               exact
-            ></Route>
-            <Route path="/" component={Home}></Route>
+            />
+            <Route path="/" component={Home} />
           </Switch>
         </Container>
         <Footer>Direitos reservados @josevitorbraga</Footer>

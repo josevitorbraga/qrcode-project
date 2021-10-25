@@ -60,7 +60,7 @@ export default function CheckInDependents(props) {
   };
 
   const handleChildToPark = child => {
-    const now = Date.now();
+    const now = new Date().toLocaleString("pt-BR");
     child.checkInTime = now;
     const response = addToPark(child);
 

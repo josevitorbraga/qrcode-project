@@ -13,12 +13,25 @@ export default function ParkProvider(props) {
     return true;
   };
 
+  const getChildById = id => {
+    const child = park.find(child => child._id === id);
+    return child;
+  };
+
   useEffect(() => {
-    console.log(park);
+    localStorage.setItem("park", JSON.stringify(park));
   }, [park]);
 
+  useEffect(() => {
+    if (!localStorage.getItem("park")) {
+      localStorage.setItem("park", JSON.stringify(park));
+    } else {
+      setPark(JSON.parse(localStorage.getItem("park")));
+    }
+  }, []);
+
   return (
-    <ParkContext.Provider value={{ park, addToPark }}>
+    <ParkContext.Provider value={{ park, addToPark, getChildById }}>
       {props.children}
     </ParkContext.Provider>
   );
@@ -30,6 +43,6 @@ export function usePark() {
   if (context === undefined) {
     throw new Error("usePark must be used within a ParkProvider");
   }
-  const { park, addToPark } = context;
-  return { park, addToPark };
+  const { park, addToPark, getChildById } = context;
+  return { park, addToPark, getChildById };
 }
