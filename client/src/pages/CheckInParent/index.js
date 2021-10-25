@@ -34,15 +34,18 @@ export default function CheckIn(props) {
     if (cpf.length === 11) {
       setCpf(cpf);
       axios
-        .get(`/api/parent/${cpf}`)
+        .get(`/api/parent/cpf/${cpf}`)
         .then(res => {
           if (res.data === null) {
+            console.log(res.data);
             toast.warn("Responsável não encontrado, faça o cadastro", {
               position: "bottom-right",
               autoClose: 3000,
             });
             setIsDisabled(false);
           } else {
+            console.log(res.data);
+
             setIsDisabled(false);
             setParentId(res.data._id);
             setName(res.data.name);

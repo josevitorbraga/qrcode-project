@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { usePark } from "../../context/parkContext";
 
 import {
   Container,
@@ -25,11 +26,13 @@ import axios from "axios";
 
 import parentImg from "../../assets/Parents.svg";
 import childImg from "../../assets/Modal.svg";
+import { toast } from "react-toastify";
 
 const steps = ["Dados do responsável", "Adicionar dependentes", "Check In"];
 
 export default function CheckInDependents(props) {
   const parentId = props.match.params.id;
+  const { addToPark } = usePark();
 
   const [parent, setParent] = useState({});
   const [childrens, setChildrens] = useState([]);
@@ -56,16 +59,29 @@ export default function CheckInDependents(props) {
       });
   };
 
+  const handleChildToPark = child => {
+    const now = Date.now();
+    child.checkInTime = now;
+    const response = addToPark(child);
+
+    if (response) {
+      props.history.push(`/checkin/${parent._id}/dependents/${child._id}`);
+    } else {
+      toast.error("Dependente já no pátio", {
+        position: "bottom-right",
+      });
+    }
+  };
+
   useEffect(() => {
     axios.get(`/api/parent/${parentId}`).then(res => {
       if (res.data === null) {
         props.history.push("/checkin");
       }
-      console.log(res.data);
       setParent(res.data);
       setChildrens(res.data.childrens);
     });
-  }, [parentId, props.history]);
+  }, [parentId, props.history, openModal]);
 
   return (
     <>
@@ -221,12 +237,15 @@ export default function CheckInDependents(props) {
             }}
           >
             {childrens.map(child => (
-              <>
-                <Option key={child._id}>
+              <div key={child._id}>
+                <Option
+                  onClick={() => handleChildToPark(child)}
+                  key={child._id}
+                >
                   {child.name} - {child.relationship} - {child.age} anos
                 </Option>
                 <Divider />
-              </>
+              </div>
             ))}
             <Button
               onClick={() => setopenModal(true)}

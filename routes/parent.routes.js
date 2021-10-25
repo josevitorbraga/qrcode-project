@@ -16,7 +16,7 @@ parentRouter.get("/:id", (req, res) => {
     });
 });
 
-parentRouter.get("/:cpf", (req, res) => {
+parentRouter.get("/cpf/:cpf", (req, res) => {
   Parent.findOne({ cpf: req.params.cpf })
     .then(parent => {
       res.json(parent);
