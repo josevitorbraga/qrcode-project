@@ -4,18 +4,20 @@ import {
   Switch,
   Route,
   useHistory,
+  Link,
 } from "react-router-dom";
 
 import ParkProvider from "./context/parkContext";
 
 import { ToastContainer } from "react-toastify";
 
-import { Header, Footer, Container } from "./styles";
+import { Header, Container } from "./styles";
 
 import CheckInDependents from "./pages/CheckInDependents";
 import CheckInParent from "./pages/CheckInParent";
 import Home from "./pages/Home/index";
 import CheckInReceipt from "./pages/CheckInReceipt";
+import CheckOut from "./pages/CheckOut";
 
 export default function App() {
   const history = useHistory();
@@ -24,13 +26,14 @@ export default function App() {
       <Router>
         <Header>
           <div>
-            <b>PARK CONTROL</b>
+            <Link to="/">PARK CONTROL</Link>
           </div>
           <div>User</div>
         </Header>
         <Container>
           <ToastContainer />
           <Switch>
+            <Route path="/checkout" component={CheckOut} />
             <Route
               path="/checkin/:id/dependents/:childId"
               component={CheckInReceipt}
@@ -48,7 +51,6 @@ export default function App() {
             <Route path="/" component={Home} />
           </Switch>
         </Container>
-        <Footer>Direitos reservados @josevitorbraga</Footer>
       </Router>
     </ParkProvider>
   );

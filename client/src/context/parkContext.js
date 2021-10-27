@@ -6,11 +6,20 @@ export default function ParkProvider(props) {
   const [park, setPark] = useState([]);
 
   const addToPark = child => {
-    if (park.includes(child)) {
-      return false;
+    const childId = child._id;
+
+    if (park.length === 0) {
+      setPark([...park, child]);
+      return true;
     }
-    setPark([...park, child]);
-    return true;
+
+    for (let i in park) {
+      if (park[i]._id === childId) {
+        return false;
+      }
+      setPark([...park, child]);
+      return true;
+    }
   };
 
   const getChildById = id => {
@@ -19,16 +28,15 @@ export default function ParkProvider(props) {
   };
 
   useEffect(() => {
-    localStorage.setItem("park", JSON.stringify(park));
-  }, [park]);
-
-  useEffect(() => {
-    if (!localStorage.getItem("park")) {
-      localStorage.setItem("park", JSON.stringify(park));
-    } else {
-      setPark(JSON.parse(localStorage.getItem("park")));
+    const park = JSON.parse(localStorage.getItem("park"));
+    if (park) {
+      setPark(park);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("park", JSON.stringify(park));
+  }, [park]);
 
   return (
     <ParkContext.Provider value={{ park, addToPark, getChildById }}>

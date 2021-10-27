@@ -10,15 +10,11 @@ export const Header = styled.div`
   color: #fff;
   padding: 1.3em;
   margin-bottom: 0.3em;
-`;
 
-export const Footer = styled.footer`
-  background-color: #385ee8;
-
-  display: flex;
-  justify-content: center;
-
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 `;

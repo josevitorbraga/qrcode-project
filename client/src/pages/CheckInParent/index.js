@@ -6,17 +6,13 @@ import {
   TextField,
   Container,
   Box,
-  Stepper,
-  Step,
-  StepLabel,
   Button,
   CircularProgress,
 } from "@material-ui/core";
 import { Form, Wraper } from "./styles";
 
 import { RiParentFill, RiInformationLine } from "react-icons/ri";
-
-const steps = ["Dados do responsável", "Adicionar dependentes", "Check In"];
+import StatusIndicator from "../../components/StatusIndicator";
 
 export default function CheckIn(props) {
   const [parentId, setParentId] = useState("");
@@ -99,15 +95,7 @@ export default function CheckIn(props) {
 
   return (
     <>
-      <Container sx={{ marginTop: "2em" }}>
-        <Stepper activeStep={0} alternativeLabel>
-          {steps.map(label => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Container>
+      <StatusIndicator currentStep={0} />
       <Box
         component="p"
         display="flex"

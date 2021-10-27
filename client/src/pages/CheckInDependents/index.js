@@ -3,9 +3,6 @@ import { usePark } from "../../context/parkContext";
 
 import {
   Container,
-  Stepper,
-  Step,
-  StepLabel,
   Card,
   CardContent,
   CardMedia,
@@ -15,6 +12,8 @@ import {
   TextField,
   Divider,
 } from "@material-ui/core";
+
+import StatusIndicator from "../../components/StatusIndicator";
 
 import { StyledForm, Option } from "./styles";
 
@@ -27,8 +26,6 @@ import axios from "axios";
 import parentImg from "../../assets/Parents.svg";
 import childImg from "../../assets/Modal.svg";
 import { toast } from "react-toastify";
-
-const steps = ["Dados do responsável", "Adicionar dependentes", "Check In"];
 
 export default function CheckInDependents(props) {
   const parentId = props.match.params.id;
@@ -143,13 +140,7 @@ export default function CheckInDependents(props) {
         </Box>
       </Modal>
       <Container sx={{ marginTop: "2em" }}>
-        <Stepper activeStep={1} alternativeLabel>
-          {steps.map(label => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+        <StatusIndicator currentStep={1} />
         <Box
           sx={{
             marginTop: "2em",

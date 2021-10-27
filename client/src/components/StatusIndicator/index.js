@@ -1,15 +1,18 @@
+import { Container, Step, StepLabel, Stepper } from "@material-ui/core";
 import React from "react";
 
-import { Container, Option } from "./styles";
+const steps = ["Dados do responsável", "Adicionar dependentes", "Check In"];
 
-import { AiOutlineDoubleRight } from "react-icons/ai";
-
-export default function StatusIndicator(props) {
+export default function StatusIndicator({ currentStep }) {
   return (
-    <Container>
-      <Option isDone>Dados do resposável</Option>
-      <AiOutlineDoubleRight size={30} />
-      <Option isDone={props.secondPhase}>Dados da criança</Option>
+    <Container sx={{ marginTop: "2em" }}>
+      <Stepper activeStep={currentStep} alternativeLabel>
+        {steps.map(label => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
     </Container>
   );
 }

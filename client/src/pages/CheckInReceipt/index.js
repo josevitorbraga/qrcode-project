@@ -4,6 +4,7 @@ import { usePark } from "../../context/parkContext";
 import { useReactToPrint } from "react-to-print";
 
 import { Box, Button } from "@material-ui/core";
+import StatusIndicator from "../../components/StatusIndicator";
 
 export default function CheckInReceipt(props) {
   const childId = props.match.params.childId;
@@ -19,6 +20,10 @@ export default function CheckInReceipt(props) {
   const [generatedQRCode, setGeneratedQRCode] = useState("");
   const [childFromStorage, setChildFromStorage] = useState({});
 
+  const handleFinish = () => {
+    props.history.push("/");
+  };
+
   const generateQrCode = () => {
     QRCode.toDataURL(childId)
       .then(response => setGeneratedQRCode(response))
@@ -33,12 +38,14 @@ export default function CheckInReceipt(props) {
 
   return (
     <>
+      <StatusIndicator currentStep={2} />
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          marginTop: "1rem",
         }}
       >
         <h1>Check In realizado!</h1>
@@ -48,7 +55,7 @@ export default function CheckInReceipt(props) {
       </Box>
       <Box
         component="div"
-        sx={{ display: "flex", justifyContent: "center", marginBottom: "3em" }}
+        sx={{ display: "flex", justifyContent: "center", marginBottom: "1em" }}
       >
         <Box
           ref={componentRef}
@@ -76,8 +83,19 @@ export default function CheckInReceipt(props) {
         </Box>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Button variant="contained" onClick={() => handlePrint()}>
+        <Button
+          sx={{ marginRight: "1em" }}
+          variant="contained"
+          onClick={() => handlePrint()}
+        >
           Imprimir
+        </Button>
+        <Button
+          onClick={() => handleFinish()}
+          variant="contained"
+          color="success"
+        >
+          Finalizar
         </Button>
       </Box>
     </>
