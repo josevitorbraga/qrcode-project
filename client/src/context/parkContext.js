@@ -24,6 +24,9 @@ export default function ParkProvider(props) {
 
   const getChildById = id => {
     const child = park.find(child => child._id === id);
+    if (!child) {
+      return false;
+    }
     return child;
   };
 

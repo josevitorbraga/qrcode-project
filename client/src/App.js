@@ -33,7 +33,7 @@ export default function App() {
         <Container>
           <ToastContainer />
           <Switch>
-            <Route path="/checkout" component={CheckOut} />
+            <Route path="/checkout" history={history} component={CheckOut} />
             <Route
               path="/checkin/:id/dependents/:childId"
               component={CheckInReceipt}
